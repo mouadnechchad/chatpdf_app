@@ -28,6 +28,7 @@ def conv(question,passage):
 
     context= """You are an expert in Moroccan History.
 Answer the following question based on the passage provided
+Answer using the language of the question, for example if I asked you in French, then the answer should be in french
     """
 
     template = context + """
