@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from langchain_conv import *
 
 app = Flask(__name__)
 
@@ -22,13 +23,20 @@ def login():
 def chat():
     if request.method == 'POST':
         # Handle chat form submission
-        message = request.form.get('message')
-        print(message)
+        print(request.form)
+        data = request.get_json()
+        message = data['msg']
+
+        print(data['msg'])
         # Perform chatbot processing here
         # You can integrate with a chatbot API or implement your own logic
+        reply = conv(message)
 
         # For demonstration purposes, let's echo the user's message
-        response = {'message': message}
+
+        response = {'question': message,
+                    'answer': reply}
+        
 
         return jsonify(response)  # Return response as JSON
 

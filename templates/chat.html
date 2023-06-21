@@ -29,12 +29,20 @@
             const message_data = messageInput.value;
             console.log(message_data)
             if (true) {
-                axios.post('/chat', { message })
+                axios.post('/chat', { msg:message_data })
                     .then(response => {
                         const { data } = response;
+                        console.log(data.question)
+                        console.log(data.answer)
                         const messageElement = document.createElement('div');
-                        messageElement.innerText = `Bot: ${message_data}`;
+                        messageElement.innerText = `User: ${message_data}`;
                         chatMessages.appendChild(messageElement);
+
+                        const answerElement = document.createElement('div');
+
+                        answerElement.innerText = `${data.answer}`;
+                        chatMessages.appendChild(answerElement);
+
                         messageInput.value = '';
                     })
                     .catch(error => {
