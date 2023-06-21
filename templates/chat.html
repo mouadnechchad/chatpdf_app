@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container mx-auto mt-10">
+        <h1 class="text-2xl font-bold mb-4">Chat</h1>
+        <div id="chat-messages" class="border border-gray-400 p-4 mb-4"></div>
+        <form id="chat-form" class="mb-4">
+            <div class="flex">
+                <input id="message" class="appearance-none border border-gray-400 rounded-l w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500" type="text" placeholder="Enter your message">
+                <button id="send-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message');
+    
+        chatForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const message_data = messageInput.value;
+            console.log(message_data)
+            if (true) {
+                axios.post('/chat', { message })
+                    .then(response => {
+                        const { data } = response;
+                        const messageElement = document.createElement('div');
+                        messageElement.innerText = `Bot: ${message_data}`;
+                        chatMessages.appendChild(messageElement);
+                        messageInput.value = '';
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
