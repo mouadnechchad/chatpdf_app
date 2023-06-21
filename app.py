@@ -27,12 +27,13 @@ def chat():
         data = request.get_json()
         message = data['msg']
 
-        print(data['msg'])
-        # Perform chatbot processing here
-        # You can integrate with a chatbot API or implement your own logic
-        reply = conv(message)
+        # print(data['msg'])
 
-        # For demonstration purposes, let's echo the user's message
+        passage = '''
+        became a destination for many British and American diplomats, spies, writers , and  businessmen . Consequently, English was the language of communication between the  different nationalities settled in Tangiers.     b.  The American landings:       The second major event was during the Second World War  when thousands of American  soldiers landed in Morocco and established some military bases in Casablanca,  Kenitra , and  Tangiers. This event is considered to be the most important historical link between Moroccans  and English (Ennaji, 2005); it dates back to 1942 when the U.S.A decided to condu ct military  landings on Morocco to prepare for a future attack on Southern Europe. These landings were  a part of Operation Torch intended to put an end to the Nazis (militaryhistory.about.com ).  Accordin gly, it became  familiar to hear English in the major cities of Morocco as the  American soldiers stayed there. There was a huge interaction between Moroccans and the  American soldiers to
+        '''
+        # Perform chatbot processing here
+        reply = conv(message,passage)
 
         response = {'question': message,
                     'answer': reply}
