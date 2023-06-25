@@ -19,7 +19,7 @@
             <div class="flex h-16 items-center justify-between">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
-                  <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                  <img class="h-8 w-8" src="{{url_for('static',filename='logo.png')}}" alt="Your Company">
                 </div>
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
@@ -120,17 +120,32 @@
         </main>
       </div>
       
-      <form id="chat-form" class="mb-4">
+      <form id="delete-form" class="mb-4">  
+        <div class="flex fixed left-0 w-full justify justify-center " style="padding: 1.3rem; bottom: 3rem;">
+            <button id="delete-btn" style="margin: .3rem;" class="flex-none rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit"> ❌  Delete Conversation</button>
+            <br>
+        </div>
+        </form>
+    <form id="chat-form" class="mb-4">
         <div class="flex fixed bottom-0 left-0 w-full " style="padding: 1.3rem;">
             <input id="message" style="margin: .3rem;" class="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" type="text" placeholder="Enter your message">
             <button id="send-btn" style="margin: .3rem;" class="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" type="submit"> Send ></button>
+
         </div>
     </form>
 
     <script>
         const chatForm = document.getElementById('chat-form');
+        const deleteForm = document.getElementById('delete-form');
         const chatMessages = document.getElementById('chat-messages');
         const messageInput = document.getElementById('message');
+
+        deleteForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const history = document.getElementById('chat-messages');
+
+            history.innerHTML = '<div></div>'
+        });
     
         chatForm.addEventListener('submit', e => {
             e.preventDefault();
@@ -155,7 +170,7 @@
     margin: .7rem;
     border-radius: 0.5rem;
     padding: .5rem;
-">Source: ${data.passage}</div>`;
+">Source: ${data.passage} <br> <span style = "font-style: italic">${data.filename} : Page ${data.pg_number}</span></div>`;
                         answerElement.class = "flex justify-between gap-x-6 py-5"
                         answerElement.style = "padding: 1rem;"
                         chatMessages.appendChild(answerElement);
