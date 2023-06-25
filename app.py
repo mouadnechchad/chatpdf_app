@@ -20,6 +20,11 @@ def login():
     # Render the login form
     return render_template('login.html')
 
+
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template('about.html')
+
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
